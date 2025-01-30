@@ -8,9 +8,9 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private FixedJoystick _joystick;
     [SerializeField] private Animator _animator;
 
-    [SerializeField] private float _speed;
+    public float speed = 10;
 
-    void AnimPlay(string animName)
+    public void AnimPlay(string animName)
     {
         _animator.SetBool("run", false);
         _animator.SetBool("idle", false);
@@ -19,11 +19,14 @@ public class PlayerController : MonoBehaviour
 
     private void FixedUpdate()
     {
-        _rigidbody.velocity = new Vector3(_joystick.Horizontal * _speed, _rigidbody.velocity.y, _joystick.Vertical * _speed);
+        _rigidbody.velocity = new Vector3(_joystick.Horizontal * speed, _rigidbody.velocity.y, _joystick.Vertical * speed);
 
-        if (_joystick.Horizontal != 0 || _joystick.Vertical != 0)
+        Vector3 direction = new Vector3(_rigidbody.velocity.x, 0, _rigidbody.velocity.z);
+
+        if (direction != Vector3.zero)
         {
-            transform.rotation = Quaternion.LookRotation(_rigidbody.velocity);
+            // Yönlendirme iþlemi sadece direction sýfýr deðilse yapýlýr
+            transform.rotation = Quaternion.LookRotation(direction);
             AnimPlay("run");
         }
         else
