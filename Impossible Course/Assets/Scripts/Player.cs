@@ -2,18 +2,30 @@ using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.SceneManagement;
+using DG.Tweening;
 
 public class Player : MonoBehaviour
 {
+    [SerializeField] private Transform uiCoinIcon;
 
     Vector3 startPosition;
     PlayerController _playerController;
+    ScoreManager _scoreManager;
+    UIManager _uiManager;
+    GameObject canvas;
 
+    private void Awake()
+    {
+        _uiManager = GameObject.Find("Game Manager").GetComponent<UIManager>();
+        _scoreManager = GameObject.Find("Game Manager").GetComponent<ScoreManager>();
+    }
 
     private void Start()
     {
         startPosition = new Vector3(transform.position.x, transform.position.y, transform.position.z);
         _playerController = GetComponent<PlayerController>();
+        canvas = GameObject.Find("Canvas");
     }
 
     private void Update()
@@ -25,21 +37,14 @@ public class Player : MonoBehaviour
     {
         if (other.CompareTag("Coin"))
         {
-            //_scoreManager.coinCount += 5;
-            //_uiManager.coinCountText.text = _scoreManager.coinCount.ToString();
-
+            _uiManager.coinCountText.text = _scoreManager.coinCount.ToString();
+            _scoreManager.coinCount += 5;
         }
 
         if (other.CompareTag("Finish"))
         {
             _playerController.speed = 0;
-            //GameManager.Instance.isGameOver = true;
-            //_canvas.SetActive(false);
-            //_drawingCanvas.SetActive(true);
-            //_mainCamera.gameObject.SetActive(false);
-            //_dummyCam.gameObject.SetActive(true);
-            //_drawingCamera.gameObject.SetActive(true);
-            //_paintBoy.SetActive(true);
+            canvas.SetActive(false);
         }
     }
 
@@ -54,6 +59,7 @@ public class Player : MonoBehaviour
     {
         _playerController.AnimPlay("dead");
         _playerController.speed = 0;
+        _scoreManager.UpdateDeadScore();
 
         yield return new WaitForSeconds(2f);
 
@@ -66,7 +72,7 @@ public class Player : MonoBehaviour
         if (transform.position.y < -7f)
         {
             transform.position = startPosition;
-            //_scoreManager.UpdateDeadScore();
+            _scoreManager.UpdateDeadScore();
         }
     }
 }
