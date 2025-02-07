@@ -14,6 +14,7 @@ public class PlayerController : MonoBehaviour
     {
         _animator.SetBool("run", false);
         _animator.SetBool("idle", false);
+        _animator.SetBool("death", false);
         _animator.SetBool(animName, true);
     }
 

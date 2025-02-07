@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 1845239635430554987}
   - component: {fileID: 271641814392180722}
   - component: {fileID: 4142956767315258139}
+  - component: {fileID: 1970426361830080754}
   m_Layer: 0
   m_Name: Spining Blade
   m_TagString: Obstacle
@@ -142,3 +143,19 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   speed: 1
   width: 6
+--- !u!208 &1970426361830080754
+NavMeshObstacle:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1688412310846275177}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Shape: 1
+  m_Extents: {x: 0.615, y: 0.097, z: 0.615}
+  m_MoveThreshold: 0.1
+  m_Carve: 1
+  m_CarveOnlyStationary: 0
+  m_Center: {x: 0, y: 0, z: 0}
+  m_TimeToStationary: 0.5

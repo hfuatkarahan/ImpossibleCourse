@@ -236,6 +236,7 @@ GameObject:
   - component: {fileID: 983498479948854984}
   - component: {fileID: 2807512989079133639}
   - component: {fileID: 7923259125734470642}
+  - component: {fileID: 3368762455322820216}
   m_Layer: 0
   m_Name: NurbsCurve.001
   m_TagString: Obstacle
@@ -369,6 +370,22 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   force: -5000
+--- !u!208 &3368762455322820216
+NavMeshObstacle:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5330889799340744256}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Shape: 1
+  m_Extents: {x: 0.035, y: 0.041, z: 0.055000003}
+  m_MoveThreshold: 0.1
+  m_Carve: 1
+  m_CarveOnlyStationary: 0
+  m_Center: {x: -0.002, y: -0.002, z: -0.224}
+  m_TimeToStationary: 0.5
 --- !u!1 &7450161376607431295
 GameObject:
   m_ObjectHideFlags: 0
