@@ -132,6 +132,7 @@ GameObject:
   - component: {fileID: 2827557979144673010}
   - component: {fileID: 2100199617520905314}
   - component: {fileID: 8412740684085255608}
+  - component: {fileID: 6321250651558690489}
   m_Layer: 0
   m_Name: FX_Fire_Huge_01
   m_TagString: Obstacle
@@ -4963,3 +4964,19 @@ CapsuleCollider:
   m_Height: 17
   m_Direction: 1
   m_Center: {x: 0, y: 7, z: 0}
+--- !u!208 &6321250651558690489
+NavMeshObstacle:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6072375211326581937}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Shape: 1
+  m_Extents: {x: 1.771, y: 4.165, z: 1.9580001}
+  m_MoveThreshold: 0.1
+  m_Carve: 1
+  m_CarveOnlyStationary: 0
+  m_Center: {x: 0.065000005, y: 2.552, z: -0.24200001}
+  m_TimeToStationary: 0.5

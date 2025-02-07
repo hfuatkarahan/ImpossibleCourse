@@ -57,7 +57,7 @@ public class Player : MonoBehaviour
     }
     private IEnumerator DeadRoutine()
     {
-        _playerController.AnimPlay("dead");
+        _playerController.AnimPlay("death");
         _playerController.speed = 0;
         _scoreManager.UpdateDeadScore();
 

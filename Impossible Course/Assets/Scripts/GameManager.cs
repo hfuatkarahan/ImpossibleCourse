@@ -1,18 +1,46 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using TMPro;
+using System.Linq;
+using static UnityEditor.Experimental.GraphView.GraphView;
 
 public class GameManager : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
+    public static GameManager Instance;
+    public TextMeshProUGUI[] rankTexts;
+
+    private GameObject[] players;
+    private List<RankSystem> sortArray = new List<RankSystem>();
+
+    public bool isGameOver = false;
+
+    private void Awake()
     {
-        
+        Instance = this;
+        players = GameObject.FindGameObjectsWithTag("Player");
     }
 
-    // Update is called once per frame
+    void Start()
+    {
+        for (int i = 0; i < players.Length; i++)
+        {
+            sortArray.Add(players[i].GetComponent<RankSystem>());
+        }
+    }
+
+    void CalculateRank()
+    {
+        sortArray = sortArray.OrderBy(x => x.distance).ToList();
+
+        for (int i = 0; i < rankTexts.Length && i < sortArray.Count; i++)
+        {
+            rankTexts[i].text = sortArray[i].name;
+        }
+    }
+
     void Update()
     {
-        
+        CalculateRank();
     }
 }
