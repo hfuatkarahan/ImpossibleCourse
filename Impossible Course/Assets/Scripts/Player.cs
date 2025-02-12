@@ -44,6 +44,7 @@ public class Player : MonoBehaviour
         if (other.CompareTag("Finish"))
         {
             _playerController.speed = 0;
+            GameManager.Instance.isGameOver = true;
             canvas.SetActive(false);
         }
     }
@@ -64,7 +65,7 @@ public class Player : MonoBehaviour
         yield return new WaitForSeconds(2f);
 
         transform.position = startPosition;
-        _playerController.speed = 10;
+        _playerController.speed = 12;
     }
 
     public void FallReturn()

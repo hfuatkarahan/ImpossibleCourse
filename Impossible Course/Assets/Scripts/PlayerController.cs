@@ -20,6 +20,8 @@ public class PlayerController : MonoBehaviour
 
     private void FixedUpdate()
     {
+        if (GameManager.Instance.isGameOver) return;
+
         _rigidbody.velocity = new Vector3(_joystick.Horizontal * speed, _rigidbody.velocity.y, _joystick.Vertical * speed);
 
         Vector3 direction = new Vector3(_rigidbody.velocity.x, 0, _rigidbody.velocity.z);
