@@ -10,6 +10,7 @@ public class Opponents : MonoBehaviour
     private NavMeshAgent agent;
     private Vector3 agentStartPosition;
 
+
     void Awake()
     {
         agent = GetComponent<NavMeshAgent>();
@@ -20,7 +21,6 @@ public class Opponents : MonoBehaviour
     {
         _animator.SetBool("walk", false);
         _animator.SetBool("idle", false);
-        _animator.SetBool("death", false);
         _animator.SetBool(animName, true);
     }
 
@@ -45,12 +45,7 @@ public class Opponents : MonoBehaviour
     {
         if (collision.gameObject.CompareTag("Obstacle"))
         {
-            DeadRoutine();
-        }
-
-        if (collision.gameObject.CompareTag("Hammer"))
-        {
-            StartCoroutine(ObstacleHit());
+            transform.position = agentStartPosition;
         }
     }
 
@@ -63,31 +58,11 @@ public class Opponents : MonoBehaviour
         }
     }
 
-    private IEnumerator DeadRoutine()
-    {
-        AnimPlay("death");
-        agent.speed = 0;
-
-        yield return new WaitForSeconds(2f);
-
-        transform.position = agentStartPosition;
-        agent.speed = 10;
-    }
-
-    IEnumerator ObstacleHit()
-    {
-        agent.enabled = false;
-        yield return new WaitForSeconds(0.3f);
-        agent.enabled = true;
-        agent.SetDestination(target.transform.position);
-    }
-
     public void OpponentsFallReturn()
     {
         if (transform.position.y < -7f)
         {
             transform.position = agentStartPosition;
-            transform.eulerAngles = agentStartPosition;
         }
     }
 
