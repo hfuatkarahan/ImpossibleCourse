@@ -8,6 +8,11 @@ using DG.Tweening;
 public class Player : MonoBehaviour
 {
     [SerializeField] private Transform uiCoinIcon;
+    [SerializeField] private GameObject paintPlayer;
+    [SerializeField] private Camera dummyCam;
+
+    public GameObject _drawingCanvas, _mainCamera, _drawingCamera;
+    private GameObject collidedObstacle;
 
     Vector3 startPosition;
     PlayerController _playerController;
@@ -46,6 +51,11 @@ public class Player : MonoBehaviour
             _playerController.speed = 0;
             GameManager.Instance.isGameOver = true;
             canvas.SetActive(false);
+            _drawingCanvas.SetActive(true);
+            _mainCamera.gameObject.SetActive(false);
+            dummyCam.gameObject.SetActive(true);
+            _drawingCamera.gameObject.SetActive(true);
+            paintPlayer.SetActive(true);
         }
     }
 
@@ -53,11 +63,17 @@ public class Player : MonoBehaviour
     {
         if (collision.gameObject.CompareTag("Obstacle"))
         {
+            collidedObstacle = collision.gameObject;
             StartCoroutine(DeadRoutine());
         }
     }
     private IEnumerator DeadRoutine()
     {
+        if (collidedObstacle != null)
+        {
+            collidedObstacle.GetComponent<Collider>().enabled = false;
+        }
+
         _playerController.AnimPlay("death");
         _playerController.speed = 0;
         _scoreManager.UpdateDeadScore();
@@ -65,7 +81,12 @@ public class Player : MonoBehaviour
         yield return new WaitForSeconds(2f);
 
         transform.position = startPosition;
-        _playerController.speed = 12;
+        _playerController.speed = 10;
+
+        if (collidedObstacle != null)
+        {
+            collidedObstacle.GetComponent<Collider>().enabled = true;
+        }
     }
 
     public void FallReturn()
