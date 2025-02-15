@@ -6,18 +6,21 @@ using UnityEngine.SceneManagement;
 
 public class UIManager : MonoBehaviour
 {
-    public GameObject startPanel;
+    public GameObject startPanel, gameSounds;
     private Opponents[] opponentsArray;
     public TextMeshProUGUI coinCountText, deadCounText;
 
+
     private void Start()
     {
+        gameSounds = GameObject.Find("Game Sounds");
         opponentsArray = FindObjectsOfType<Opponents>();
     }
 
     public void TapToStart()
     {
         startPanel.SetActive(false);
+        gameSounds.transform.Find("Background Music").GetComponent<AudioSource>().Play();
 
         foreach (var opponent in opponentsArray)
         {
